@@ -1,4 +1,4 @@
-# Habitat quality - Threat layers**
+# Habitat quality - Threat layers
 
 Here are the codes designed to produce the "threat layers" needed for the natcap InVEST habitat quality model. The layers used are:
 
