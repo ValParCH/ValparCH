@@ -2,15 +2,15 @@
 
 Here are the codes designed to produce the "threat layers" needed for the natcap InVEST habitat quality model. The layers used are:
 
-1. **primary_roads**
+1. ### **primary_roads**
 
    composed of highways and main roads (TLM3D codes: 2,8,9,20,21)
 
-2. **secondary_roads**
+2. ### **secondary_roads**
 
    composed of secondary roads (TLM3D codes: 10,11)
 
-3. **urban**
+3. ### **urban**
 
    comprises the following LULC categories: 
 
@@ -29,11 +29,11 @@ Here are the codes designed to produce the "threat layers" needed for the natcap
 
    And is defined as being part of a municipality with either a population density of >100/km2 OR >10 000 inhabitants
 
-4. **rural_residential**
+4. ### **rural_residential**
 
    Comprises the same categories as urban but is defined as being part of a municipality with either a population density of <100/km2 OR <10 000 inhabitants
 
-5. **crops**
+5. ### **crops**
 
    comprises the following LULC categories:
 
