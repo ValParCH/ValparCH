@@ -1,4 +1,4 @@
-# **Habitat quality - InVEST model
+# Habitat quality - InVEST model
 
 Here is the code and main references used to run  and calibrate natcap InVEST habitat quality model.
 
