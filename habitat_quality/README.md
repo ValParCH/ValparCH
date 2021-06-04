@@ -4,7 +4,7 @@ Here is the code and main references used to run  and calibrate natcap InVEST ha
 
 ### Tables building
 
-<u>#### Sensitivity.csv</u>
+#### Sensitivity.csv
 
 Each land use class “**HABITAT**” column was filled based on the naturality index created thanks to expert knowledge classification. Based on the naturality classification, a score of 0.81-1 was considered habitat and kept as is,  and a score below this threshold was assigned “0”. Categories referring to habitats set on agricultural lands (e.g. cluster of trees, rows of fruit trees) were also assigned “0”.
 
@@ -12,7 +12,7 @@ PRIMARY ROADS (pr_rd_c) and SECONDARY ROADS (sc_rd_c) were set based on (Berta A
 
 URBAN (urban_c), RURAL RESIDENTIAL (rures_c), and CROPS (crop_c) were set according to (Gong et al., 2019)
 
-<u>#### Threats.csv</u>
+#### Threats.csv
 
 Values for the threats table (maximum distance of influence, weights, decay) were based on litterature review using the following studies 
 
@@ -22,13 +22,14 @@ DECAY: Berta Aneseyee et al., 2020
 
 WEIGHT: Terrado et al., 2016
 
-<u>Half saturation constant</u>
+#### Half saturation constant
 
 A first run of the model using the half saturation constant of **0.5** was performed. The maximal degradation of habitat coefficient was then 0.15, and a new model was run based on half this maximum coefficient **(0.075)** as suggested by Sharp et al., 2020 (InVEST user guide)
 
 
 
 ------
+
 
 Berta Aneseyee, A., Noszczyk, T., Soromessa, T., & Elias, E. (2020). The InVEST Habitat Quality Model Associated with Land Use/Cover Changes: A Qualitative Case Study of the Winike Watershed in the Omo-Gibe Basin, Southwest Ethiopia. *Remote Sensing*, *12*(7), 1103. https://doi.org/10.3390/rs12071103
 
