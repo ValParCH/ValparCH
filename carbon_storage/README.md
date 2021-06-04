@@ -4,13 +4,13 @@ Here is the code and main references used to process data and run natcap InVEST 
 
 ### Workflow
 
-The swiss territory is divided in 3 categories, relative to altitude (<601m, 601-1200m,>1200m) and then again in 5 categories, relative to swiss production regions ("Alpes, Plateau, Sud des Alpes, Préalpes and Jura")
+The swiss territory is divided in 3 categories, relative to altitude (<601m, 601-1200m,>1200m) and then again in 5 categories, relative to swiss production regions ("Alpes, Plateau, Sud des Alpes, Préalpes and Jura") (1_Process_carbon.py)
 
-Individual InVEST models are run on each area (altitude + production region) and then bonded together. 
+Individual InVEST models are run on each area (altitude + production region) (2_InVEST_carbon.py) and then bonded together (3_Process_carbon.py). 
 
 #### Biophysical table.csv
 
-Individual biophysical tables are generated for each altitude + production region, based on data from the *Switzerland's Greenhouse Gas Inventory* (table 6-4, FOEN, 2020a)
+Individual biophysical tables are generated for each altitude + production region (biophysical_tables.zip), based on data from the *Switzerland's Greenhouse Gas Inventory* (table 6-4, FOEN, 2020a)
 
 The land use / land cover categories are reclassified based on (table 6-6, FOEN, 2020a) reclassification. 
 
