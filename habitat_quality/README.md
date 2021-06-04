@@ -22,7 +22,7 @@ DECAY: Berta Aneseyee et al., 2020
 
 WEIGHT: Terrado et al., 2016
 
-<u>#### Half saturation constant</u>
+<u>Half saturation constant</u>
 
 A first run of the model using the half saturation constant of **0.5** was performed. The maximal degradation of habitat coefficient was then 0.15, and a new model was run based on half this maximum coefficient **(0.075)** as suggested by Sharp et al., 2020 (InVEST user guide)
 
