@@ -1,0 +1,6 @@
+﻿THREAT;MAX_DIST;WEIGHT;DECAY;CUR_PATH
+crop_c;1;0.68;linear;threat_rasters\crop_c.tif
+rures_c;0.6;0.5;exponential;threat_rasters\rures_c.tif
+urban_c;0.6;1;exponential;threat_rasters\urban_c.tif
+pr_rd_c;1.2;0.71;linear;threat_rasters\pr_rd_c.tif
+sc_rd_c;0.365;0.71;linear;threat_rasters\sc_rd_c.tif
