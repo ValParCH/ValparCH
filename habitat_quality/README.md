@@ -14,7 +14,7 @@ URBAN (urban_c), RURAL RESIDENTIAL (rures_c), and CROPS (crop_c) were set accord
 
 #### Threats.csv
 
-Values for the threats table (maximum distance of influence, weights, decay) were based on litterature review using the following studies 
+Values for the threats table (maximum distance of influence, weights, decay) were based on litterature review using the following studies: 
 
 MAX_DIST: Berta Aneseyee et al., 2020; Forman & Deblinger, 2000; Palomino & Carrascal, 2007; Shilling & Waetjen, 2012
 
