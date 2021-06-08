@@ -52,5 +52,9 @@ for(i in 1:nrow(reg)){
   print(paste(imp_name, " added"))
 }
 
+thecrs<-sp::CRS('+init=epsg:2056')
+crs(bind)<- thecrs
+
 writeRaster(bind,(paste(wd,"results","C_gain_92-97", sep="/")), format="GTiff",overwrite = TRUE)
+
 
