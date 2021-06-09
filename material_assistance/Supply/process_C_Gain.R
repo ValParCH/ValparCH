@@ -11,7 +11,7 @@ reg<-fread(paste(wd,"Biophysical_tables_92-97","c_gain_9297.csv",sep="/"))
 
 for(i in 1:nrow(reg)){
   name<-reg$name[i]
-  val<-reg$value[i]
+  val<-reg$val_px[i]
   
   print(paste(name, ", C value:", val,sep=" "))
   
