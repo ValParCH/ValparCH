@@ -12,7 +12,7 @@ the folder "rasters" is copied from the carbon_storage NCP.
 
 ### Flow
 
-The Flow of this NCP is estimated through official reports of Wood harvesting in switzerland over the desired period. Those harvest quantities (in m3) are attributed to Land use categories corresponding to productive forests :
+The Flow of this NCP is estimated through official reports of Wood harvesting in switzerland over the desired period (FOEN, 2020). Those harvest quantities (in m3) are attributed to Land use categories corresponding to productive forests :
 
 | Code | Name                                      |
 | ---- | ----------------------------------------- |
@@ -24,7 +24,14 @@ The Flow of this NCP is estimated through official reports of Wood harvesting in
 | 18   | Clusters of trees (on agricultural areas) |
 | 19   | Other woods                               |
 
-the value attributed to those pixels is distributed according to the Canton and the production region. This estimation is quite coarse. 
+the value attributed to those pixels is distributed according to the Canton and the production region. This estimation is quite coarse. Comparing the dataset of forest surface from FOEN (2020) with the surface obtained from the LULC map with those 7 categories: 
+
+
+| LULC map (ha) | FOEN dataset (ha), average over 1992-1997 | Difference (ha) |
+| ------------- | ----------------------------------------- | --------------- |
+| 980510        | 1060297                                   | 79787           |
+
+
 
 
 ------
@@ -33,6 +40,8 @@ FOEN 2021: Switzerland’s Greenhouse Gas Inventory 1990–2019: National Invent
 and reporting tables (CRF). Submission of April 2021 under the United Nations Framework
 Convention on Climate Change and under the Kyoto Protocol. Federal Office for the
 Environment, Bern. http://www.climatereporting.ch
+
+FOEN 2020: Wood harvest in switzerland in m3, FSO number :	px-x-0703010000_102, retrieved at: https://www.bfs.admin.ch/bfs/en/home/statistics/agriculture-forestry.assetdetail.13167998.html
 
 Schirpke, U., Candiago, S., Egarter Vigl, L., Jäger, H., Labadini, A., Marsoner, T., Meisch, C., Tasser, E., & Tappeiner, U. (2019). Integrating supply, flow and demand to enhance the understanding of interactions among multiple ecosystem services. Science of The Total Environment, 651, 928–941. https://doi.org/10.1016/j.scitotenv.2018.09.235
 
