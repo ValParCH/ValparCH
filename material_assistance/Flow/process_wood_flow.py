@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------------
-
-# 
+# This code aims at dividing switzerland by canton and by production region, and then clipping a raster LULC map
+# by each of these possible categories
 # ---------------------------------------------------------------------------
 
 
