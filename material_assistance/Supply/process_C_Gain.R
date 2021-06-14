@@ -57,4 +57,12 @@ crs(bind)<- thecrs
 
 writeRaster(bind,(paste(wd,"results","C_gain_92-97", sep="/")), format="GTiff",overwrite = TRUE)
 
+#---- translate to an index 
+
+bind_ind<- bind/maxValue(bind)
+
+writeRaster(bind_ind,(paste(wd,"results","C_gain_92-97_index", sep="/")), format="GTiff",overwrite = TRUE)
+
+
+
 
