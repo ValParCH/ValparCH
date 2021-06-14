@@ -8,7 +8,6 @@ Switzerland is divided in altitude and production regions (see carbon_storage NC
 
 the file C_gain_XXXX.csv comports the values averaged over the desired time period, and divided to get a value per pixel (as opposed to per hectare; *625/10 000).
 
-the folder "rasters" is copied from the carbon_storage NCP.
 
 ### Flow
 
