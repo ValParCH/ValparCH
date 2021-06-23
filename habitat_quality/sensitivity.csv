@@ -3,7 +3,7 @@ LULC;NAME;HABITAT;pr_rd_c;sc_rd_c;urban_c;rures_c;crop_c
 11;Normal dense forest;1;0.86;0.82;0.6;0.5;0.3
 12;Open forest (unproductive areas);1;0.86;0.82;0.6;0.5;0.3
 13;Open forest (agricultural areas);1;0.86;0.82;0.6;0.5;0.3
-14;Forest stripes, edges;1;0.86;0.82;0.6;0.5;0.3
+14;Forest stripes edges;1;0.86;0.82;0.6;0.5;0.3
 15;Brush forest;0.91;0.86;0.82;0.5;0.4;0.4
 16;Scrub vegetation;0.91;1;1;0.5;0.4;0.4
 18;Clusters of trees (on agricultural areas);0;0;0;0;0;0
@@ -14,7 +14,7 @@ LULC;NAME;HABITAT;pr_rd_c;sc_rd_c;urban_c;rures_c;crop_c
 35;Railway station grounds;0;0;0;0;0;0
 36;Railway lines;0;0;0;0;0;0
 37;Airports;0;0;0;0;0;0
-38;Airfields, green airport environs;0;0;0;0;0;0
+38;Airfields green airport environs;0;0;0;0;0;0
 41;Industrial ground;0;0;0;0;0;0
 45;Land around 25 (One- and two family houses);0;0;0;0;0;0
 46;Land around 26 (Terraced houses);0;0;0;0;0;0
@@ -23,7 +23,7 @@ LULC;NAME;HABITAT;pr_rd_c;sc_rd_c;urban_c;rures_c;crop_c
 49;Land around 29 (Unspecified buildings);0;0;0;0;0;0
 51;Sport ground;0;0;0;0;0;0
 52;Garden allotments;0;0;0;0;0;0
-53;Camping, caravan sites;0;0;0;0;0;0
+53;Camping caravan sites;0;0;0;0;0;0
 54;Golf courses;0;0;0;0;0;0
 56;Cemeteries;0;0;0;0;0;0
 59;Public parks;0;0;0;0;0;0
