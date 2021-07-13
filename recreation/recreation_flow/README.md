@@ -18,7 +18,7 @@ The data is acquired through the [Inaturalist.org](https://www.inaturalist.org/)
 
 ### Modelling
 
-The model is then created (see "Recreation_flow_RF" script) by training a RF algorithm with several environmental variables on the response data. The original variables were selected using a correlation matrix to remove variables with >.8 correlation. 
+The model is then created (see [script](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/RF_flickr_inat.R)) by training a RF algorithm with several environmental variables on the response data. The original variables were selected using a correlation matrix to remove variables with >.8 correlation. 
 
 | Response variable     | Flickr + Inaturalist photo locations                         |
 | --------------------- | ------------------------------------------------------------ |
