@@ -8,7 +8,7 @@ wd<-setwd("C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/
 devtools::install_github("nfox29/photosearcher")
 library(photosearcher)
 
-api_key = "206413bd47bac2634aa8d667cf28b968"
+api_key = "#YOUR API KEY HERE"
 
 
 # Setting research terms
@@ -18,9 +18,6 @@ bb = "5.835645,45.73923,10.64321,47.83945" # swiss bounding box
 tag_list = c("mountains","montagn*", "berg*", "foret*", "foresta", "wald", "natur*", "landschaft", "paysage", "paesaggio", "landscape")
 
 #bb= "6.443481,46.491168,6.778564,46.623299" # Lausanne
-
-
-
 
 list_query<-NA
 
