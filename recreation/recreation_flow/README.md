@@ -10,7 +10,7 @@ The pictures are gathered using keywords in French, German, Italian and English,
 
 "mountains","montagn", "berg", "foret", "foresta", "wald", "natur", "landschaft", "paysage", "paesaggio", "landscape"
 
-The data is then filtered to keep only one observation per user. The process is accessible in the script "Flickr_pictures_extraction"
+The data is then filtered to keep only one observation per user. The process is accessible in the [R script of this folder](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/Flickr_pictures_extraction.R). 
 
 ### Data acquisition - Inaturalist
 
