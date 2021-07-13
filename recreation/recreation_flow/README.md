@@ -42,7 +42,7 @@ The goodness of fit of the model was assessed by testing the prediction on 20% o
 | R^2                     | 0.47 |
 | RMSE                    | 0.36 |
 
-![](C:\Users\kuelling\Documents\VALPAR\ES Assessment\Recreation\Pictures\RF\cor_circle.png)
+![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/cor_circle.jpeg)
 
 ![](C:\Users\kuelling\Documents\VALPAR\ES Assessment\Recreation\Pictures\RF\correlogram.png)
 
