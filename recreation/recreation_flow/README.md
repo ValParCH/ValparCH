@@ -1,6 +1,6 @@
 # Recreation - Flow modelling
 
-To get an estimation of the flow (or use) of the Recreation NCP, a distribution model is created based on observation data from two picture sharing websites (Flickr, Inaturalist) using a Random Forest regression. 
+To get an estimation of the flow (or use) of the Recreation NCP, a distribution model is created based on [observation data](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/data) from two picture sharing websites (Flickr, Inaturalist) using a Random Forest regression. 
 
 ### Data acquisition - Flickr
 
