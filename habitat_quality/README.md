@@ -4,7 +4,7 @@ Here is the code and main references used to run  and calibrate natcap InVEST ha
 
 ### Tables building
 
-#### Sensitivity.csv
+#### [Sensitivity.csv](https://github.com/ValParCH/ValparCH/blob/main/habitat_quality/data/sensitivity.csv)
 
 Each land use class “**HABITAT**” column was filled based on the naturality index created thanks to expert knowledge classification. Based on the naturality classification, a score of 0.81-1 was considered habitat and kept as is,  and a score below this threshold was assigned “0”. Categories referring to habitats set on agricultural lands (e.g. cluster of trees, rows of fruit trees) were also assigned “0”.
 
@@ -12,7 +12,7 @@ PRIMARY ROADS (pr_rd_c) and SECONDARY ROADS (sc_rd_c) were set based on (Berta A
 
 URBAN (urban_c), RURAL RESIDENTIAL (rures_c), and CROPS (crop_c) were set according to (Gong et al., 2019)
 
-#### Threats.csv
+#### [Threats.csv](https://github.com/ValParCH/ValparCH/blob/main/habitat_quality/data/threats.csv)
 
 Values for the threats table (maximum distance of influence, weights, decay) were based on litterature review using the following studies: 
 
