@@ -42,5 +42,21 @@ The goodness of fit of the model was assessed by testing the prediction on 20% o
 | R^2                     | 0.47 |
 | RMSE                    | 0.36 |
 
-![]()
+![](C:\Users\kuelling\Documents\VALPAR\ES Assessment\Recreation\Pictures\RF\cor_circle.png)
+
+![](C:\Users\kuelling\Documents\VALPAR\ES Assessment\Recreation\Pictures\RF\correlogram.png)
+
+As displayed, the annual mean temperature as well as the slope variables were correlated above the chosen threshold, so they were removed from the analysis. 
+
+Here are the importance of the variables in the model prediction: 
+
+![VarimpPlot](C:\Users\kuelling\Documents\VALPAR\ES Assessment\Recreation\Pictures\RF\VarimpPlot.png)
+
+The transportation network (paths and roads) as well as the settlement areas seem to be the most influencial of picture taking. We can examine the distribution of land use land cover classes according to photo locations on this graph: 
+
+![Flickr_inat_LULC_sep](C:\Users\kuelling\Documents\VALPAR\ES Assessment\Recreation\Pictures\RF\Flickr_inat_LULC_sep.png)
+
+
+
+We observe the same pattern as in the nodes from the RF. 
 
