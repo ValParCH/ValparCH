@@ -42,19 +42,19 @@ The goodness of fit of the model was assessed by testing the prediction on 20% o
 | R^2                     | 0.47 |
 | RMSE                    | 0.36 |
 
-![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/cor_circle.png)
+![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/cor_circle.png)
 
-![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/correlogram.png)
+![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/correlogram.png)
 
 As displayed, the annual mean temperature as well as the slope variables were correlated above the chosen threshold, so they were removed from the analysis. 
 
 Here are the importance of the variables in the model prediction: 
 
-![VarimpPlot](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/VarimpPlot.png)
+![VarimpPlot](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/VarimpPlot.png)
 
 The transportation network (paths and roads) as well as the settlement areas seem to be the most influencial for picture taking probability. We can examine the distribution of land use land cover classes according to photo locations on this graph: 
 
-![Flickr_inat_LULC_sep](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/Flickr_inat_LULC_sep.png)
+![Flickr_inat_LULC_sep](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/Flickr_inat_LULC_sep.png)
 
 
 
