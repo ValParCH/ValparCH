@@ -37,23 +37,17 @@ paths<- "C:/Users/kuelling/Documents/VALPAR/DATA/TLM3D/paths_16/dist_path_16.tif
 roads<- "C:/Users/kuelling/Documents/VALPAR/DATA/TLM3D/roads_8_9_10_11/dist_road_25.tif"
 
 
-path<- raster(paths)
+path<- raster(paths); crs(path)<-crs(tri); extent(path)<-extent(tri)
 acc<- raster(access)
 het<- raster(hetero)
 tri<- raster(rugg)
 road<- raster(roads)
 
 
-crs(path)<-crs(tri)
-extent(path)<-extent(tri)
-extent(road)<-extent(tri)
-extent(fore)<-extent(tri)
-extent(hydr)<-extent(tri)
-extent(agri)<-extent(tri)
-extent(settl)<-extent(tri)
+#--Preparing the explanatory variables raster stack
+
 predictors<-stack(temp,rain,slope,dem,pop,wsl,path,acc, het,tri,road,agri,fore,hydr,lowv,settl)
 names(predictors)<- c("temp", "rain", "slope","dem", "pop", "wsl","path","acc","het","tri","road","agri","fore","hydr","lowv","settl")
-
 
 #--observations 
 
@@ -92,10 +86,10 @@ obs<-rbind(obs,obs_inat)
 
 #-------
 
-#Cropping to GPH extent for testing
-gp<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/inVEST/data/national boundaries/Gruyere_enhaut.shp"
-gph<-st_read(gp)
-pred<-crop(predictors,gph)
+#Run only for testing with smaller extent (e.g. here: Park gruyère pays d'Enhaut extent
+#gp<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/inVEST/data/national boundaries/Gruyere_enhaut.shp"
+#gph<-st_read(gp)
+#pred<-crop(predictors,gph)
 
 
 # Extracting values of observation points
@@ -103,7 +97,6 @@ pred<-predictors # for swiss modelling
 bfc <- extract(pred, obs)
 bfc<-na.omit(bfc)
 colnames(bfc)<-c("temp", "rain", "slope","dem", "pop", "wsl","path","acc","het","tri","road","agri","fore","hydr","lowv","settl")
-
 
 # generating background points
 
@@ -129,18 +122,13 @@ fviz_pca_var(pca,
              repel = TRUE     
 )
 
-
-
 #correlogram
 
 M<-cor(d)
 corrplot(M, method="circle", type= "upper")
 corrplot(M, method="number", type= "upper")
 
-
-#I remove one of each variables with >0.8 correlation
-
-#slope, temp
+#I remove one of each variables with >0.8 correlation, i.e. Slope and mean annual temperature
 d<-d[,-c(2,4)]
 pred<- dropLayer(pred, c(1,3))
 
@@ -159,7 +147,7 @@ for (i in 1:k) {
 }
 
 
-# - Fitting cart model
+#--- Fitting cart model
 library(rpart)
 cart <- rpart(pa~., data=d)
 printcp(cart)
@@ -170,11 +158,11 @@ plot(cart, uniform=TRUE, main="Regression Tree")
 text(cart, cex=.8, digits=1)
 
 
-#---- fitting random forest
+#--- fitting random forest
 
 library(randomForest)
 
-#--classification
+#--classification (the final chosen model is the regression model
 fpa <- as.factor(train[, 'pa'])
 crf <- randomForest(train[, 2:ncol(train)], fpa)
 crf
@@ -192,26 +180,23 @@ rrf
 plot(rrf)
 varImpPlot(rrf)
 
-#-- predicting
+#-- predicting for swiss extent
 
 proj_crf<- predict(pred, crf,type = "prob")
 proj_rrf<- predict(pred,rrf, type ="response")
 
 #--evaluating the models
+
 #rrf
 # RMSE
-
 pred_values = predict(rrf,test)
 actual_values = test$pa
-
-#finding threshold
 
 rmse<-RMSE(pred_values,actual_values)
 
 #R squared
 
 1 - sum((actual_values-pred_values)^2)/sum((actual_values-mean(actual_values))^2)
-
 
 # AUC
 
@@ -225,8 +210,6 @@ require(pROC)
 rf.roc<-roc(train$pa,crf$votes[,2])
 plot(rf.roc)
 auc(rf.roc) # 0.8942
-
-
 
 #-- exporting
 
