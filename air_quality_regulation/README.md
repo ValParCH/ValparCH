@@ -34,7 +34,7 @@ Data needs:
 
 The data has been resampled to the same extent, projection and resolution (Swiss grid, LV95, 25m). The final result is a map of PM10 rate of removal, the process has been performed on R (see script):
 
-[](https://github.com/ValParCH/ValparCH/blob/main/air_quality_regulation/figs/AQR_value_PM10.png)
+![](https://github.com/ValParCH/ValparCH/blob/main/air_quality_regulation/figs/AQR_value_PM10.png)
 
 
 
