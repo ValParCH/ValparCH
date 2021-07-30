@@ -57,3 +57,5 @@ Powe, N. A., & Willis, K. G. (2004). Mortality and morbidity benefits of air pol
 Remme, R. P., Schröter, M., & Hein, L. (2014). Developing spatial biophysical accounting for multiple ecosystem services. *Ecosystem Services*, *10*, 6–18. doi: 10.1016/j.ecoser.2014.07.006
 
 Yin, S., Zhang, X., Yu, A., Sun, N., Lyu, J., Zhu, P., & Liu, C. (2019). Determining PM2.5 dry deposition velocity on plant leaves: An indirect experimental method. *Urban Forestry & Urban Greening*, *46*, 126467. doi: 10.1016/j.ufug.2019.126467
+
+Zinke, P. J., 1967, Forest interception studies in the United States, in: Forest Hydrology, Pergamon Press, Oxford.
