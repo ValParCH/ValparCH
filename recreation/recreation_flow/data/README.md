@@ -6,8 +6,8 @@ Flickr:
 
 Inaturalist: 
 Raw data : 
-             "plants_CH.zip"
-             "vertebrates_ch.csv"
-             "birds_fish_CH.csv"
+"plants_CH.zip"
+"vertebrates_ch.csv"
+"birds_fish_CH.csv"
 Processed LV95 (only coordinates): 
-             "inat_10-21_CH.csv"
+"inat_10-21_CH.csv"
