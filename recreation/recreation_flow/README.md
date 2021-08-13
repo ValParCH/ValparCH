@@ -52,7 +52,7 @@ Here are the importance of the variables in the model prediction:
 
 ![VarimpPlot](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/VarimpPlot.png)
 
-The transportation network (paths and roads) as well as the settlement areas seem to be the most influencial for picture taking probability. We can examine the distribution of land use land cover classes according to photo locations on this graph: 
+The transportation network (paths and roads) as well as the settlement areas seem to be the most influencial for picture taking probability. We can examine the distribution of land use land cover classes according to photo locations on [this graph](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/barplot_LULC_photo_freq.R): 
 
 ![Flickr_inat_LULC_sep](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/Flickr_inat_LULC_sep.png)
 
