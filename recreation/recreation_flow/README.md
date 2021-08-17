@@ -40,7 +40,7 @@ The goodness of fit of the model was assessed by testing the prediction on 20% o
 | ----------------------- | ---- |
 | AUC                     | 0.89 |
 | R^2                     | 0.47 |
-| RMSE                    | <span style="color:red">0.36</span>.|
+| RMSE                    | <span style="color:red"> *0.36* </span>.|
 
 ![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/cor_circle.png)
 
