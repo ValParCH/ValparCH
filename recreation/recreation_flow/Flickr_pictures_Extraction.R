@@ -1,14 +1,14 @@
 library(progress)
 
 
-wd<-setwd("C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/other")
+wd<-setwd("C:/Users/...")
 
 #photosearcher package
 
 devtools::install_github("nfox29/photosearcher")
 library(photosearcher)
 
-api_key = "#YOUR API KEY HERE"
+api_key = "api key (available upon request)"
 
 
 # Setting research terms
