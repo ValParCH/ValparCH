@@ -56,7 +56,7 @@ The final NCP is a combination of the recreation potential and the remoteness/ac
 |    4 | **Remote**        |     3     |       6       |     9     |
 |    5 | **Very Remote**   |     3     |       6       |     9     |
 
-and the resulting classification is interpretable as such :
+and the resulting classification is interpretable as such (according to ESTIMAP methods, but won't be retained in this study as this classification is not ordinal and not relevant for comparing with other ecosystem services): 
 
 
 
