@@ -2,21 +2,21 @@ library(data.table)
 library(raster)
 library(ggplot2)
 
-setwd("C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/LULCanalysis/")
+setwd("C:/Users/.../")
 
 #Load lulc map
 
-fold<-"C:/Users/kuelling/Documents/VALPAR/DATA/UNIL_data/lulc"
+fold<-"C:/Users/.../"
 
 lulc<-raster(paste(fold,"LULC_92-95_25.tif",sep="/"))
 
 #Load labels for LULC map
 
-lab<-fread("C:/Users/kuelling/Documents/VALPAR/DATA/Data CRS extent ok/geotif_new_extent/LULC_labels.csv")
+lab<-fread("C:/Users/.../LULC_labels.csv")
 
 
 #Inat
-fold_i<-"C:/Users/kuelling/Documents/VALPAR/DATA/Inaturalist"
+fold_i<-"C:/Users/.../Inaturalist"
 data_inat<-fread(paste(fold_i,"inat_10-21_CH.csv",sep="/"))
 bfc <- extract(lulc, data_inat)
 inat<-cbind(data_inat,bfc)
@@ -25,7 +25,7 @@ newdf<-as.data.frame(table(inat$lulc))
 
 
 #Flickr
-fold_f<-"C:/Users/kuelling/Documents/VALPAR/DATA/Flickr"
+fold_f<-"C:/Users/.../Flickr"
 data_flickr<-fread(paste(fold_f, "Flickr_keyword_06-21_LV95.csv",sep="/"))
 bfc_f <- extract(lulc, data_flickr)
 
@@ -39,7 +39,6 @@ newdf<-merge(newdf,lab,by.x= "Var1", by.y= "LULC")
 newdf2<-merge(newdf2,lab,by.x= "Var1", by.y= "LULC")
 
 #differenciating the two data sources 
-
 a<-newdf
 b<-newdf2
 
