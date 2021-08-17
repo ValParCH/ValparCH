@@ -1,4 +1,4 @@
-wd<-setwd("C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/RF")
+wd<-setwd("C:/Users/...")
 library(data.table)
 library(raster)
 library(rgdal)
@@ -16,7 +16,7 @@ library(rspatial)
 
 ###---- loading variables
 #Path to data
-datad<-"C:/Users/kuelling/Documents/VALPAR/DATA/UNIL_data"
+datad<-"C:/Users/datapath"
 temp<- readRDS(paste(datad,"bioclim25/06-15/mean_temp_annual/ch_bioclim_chclim25_present_pixel_2006-2015_bio1.rds",sep="/"))
 rain<- readRDS(paste(datad,"bioclim25/06-15/mean_rain_annual/ch_bioclim_chclim25_present_pixel_2006-2015_bio12.rds",sep="/"))
 slope<- readRDS(paste(datad,"slope_mean/ch_topo_alti3d2016_pixel_slope_mean2m.rds",sep="/"))
@@ -30,11 +30,11 @@ hydr<- readRDS(paste(datad,"lulc","aggr","ch_lulc_geostat_present_pixel_1992-199
 lowv<- readRDS(paste(datad,"lulc","aggr","ch_lulc_geostat_present_pixel_1992-1997_lowvegaggr_25.rds",sep="/"))
 settl<- readRDS(paste(datad,"lulc","aggr","ch_lulc_geostat_present_pixel_1992-1997_seuramaggr_25.rds",sep="/"))
 
-access<- "C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation - estimap/Automatisation/results/accessibility_crs.tif"
-hetero<- "C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Landscape heterogeneity/ls_hetereogeneity_CH_25m.tif"
-rugg<- "C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/TerrainRuggednessIndex/TRI_25m_CH.tif"
-paths<- "C:/Users/kuelling/Documents/VALPAR/DATA/TLM3D/paths_16/dist_path_16.tif"
-roads<- "C:/Users/kuelling/Documents/VALPAR/DATA/TLM3D/roads_8_9_10_11/dist_road_25.tif"
+access<- "C:/Users/.../accessibility_crs.tif"
+hetero<- "C:/Users/.../ls_hetereogeneity_CH_25m.tif"
+rugg<- "C:/Users/.../TerrainRuggednessIndex/TRI_25m_CH.tif"
+paths<- "C:/Users/.../dist_path_16.tif"
+roads<- "C:/Users/.../dist_road_25.tif"
 
 
 path<- raster(paths); crs(path)<-crs(tri); extent(path)<-extent(tri)
@@ -63,7 +63,7 @@ obs3<-data.frame(obs2)
 obs<-obs3
 
 # Inaturalist data
-inat<-"C:/Users/kuelling/Documents/VALPAR/DATA/Inaturalist"
+inat<-"C:/Users/.../Inaturalist"
 
 plants<-fread(paste(inat,"export_plants_CH","plants_CH.csv", sep= "/"))
 vert<-fread(paste(inat,"export_vertebrates_CH","vertebrates_ch.csv", sep= "/"))
@@ -87,7 +87,7 @@ obs<-rbind(obs,obs_inat)
 #-------
 
 #Run only for testing with smaller extent (e.g. here: Park gruyère pays d'Enhaut extent
-#gp<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/inVEST/data/national boundaries/Gruyere_enhaut.shp"
+#gp<-"C:/Users/.../Gruyere_enhaut.shp"
 #gph<-st_read(gp)
 #pred<-crop(predictors,gph)
 
@@ -162,7 +162,7 @@ text(cart, cex=.8, digits=1)
 
 library(randomForest)
 
-#--classification (the final chosen model is the regression model
+#--classification (the final chosen model is the regression model)
 fpa <- as.factor(train[, 'pa'])
 crf <- randomForest(train[, 2:ncol(train)], fpa)
 crf
@@ -182,8 +182,8 @@ varImpPlot(rrf)
 
 #-- predicting for swiss extent
 
-proj_crf<- predict(pred, crf,type = "prob")
-proj_rrf<- predict(pred,rrf, type ="response")
+proj_crf<- predict(pred, crf,type = "prob") #classification model
+proj_rrf<- predict(pred, rrf, type ="response") #regression model
 
 #--evaluating the models
 
@@ -213,6 +213,6 @@ auc(rf.roc) # 0.8942
 
 #-- exporting
 
-xd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/RF/Exploration"
-writeRaster(proj_crf, paste(xd, "RF_crf_CH_allvar.tif", sep="/"),overwrite = TRUE)
+xd<-"C:/Users/..."
+writeRaster(proj_rrf, paste(xd, "RF_rrf_CH_allvar.tif", sep="/"),overwrite = TRUE)
 
