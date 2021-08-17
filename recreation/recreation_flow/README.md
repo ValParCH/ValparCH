@@ -1,6 +1,8 @@
 # Recreation - Flow modelling
 
-To get an estimation of the flow (or use) of the outdoor recreation NCP, a distribution model is created based on [observation data](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/data) from two picture sharing websites (Flickr, Inaturalist) using a Random Forest regression. 
+To get an estimation of the flow (or use) of the outdoor recreation NCP, a distribution model is created based on [observation data](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/data) from two picture sharing websites (Flickr, Inaturalist) using a Random Forest regression. Photo sharing apps are often used to get an idea of recreational places in ecosystem services assessment. The two chosen apps are very different in their aim, one (Flickr) is a hosting service for pictures, whereas the other (Inaturalist) aims at sharing nature observations and agreeing upon species classification. Nevertheless, both occur in similar locations, and [this graph](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/barplot_LULC_photo_freq.R) gives an insight of main correspondences of photo locations and LULC classes: 
+
+![Flickr_inat_LULC_sep](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/Flickr_inat_LULC_sep.png)
 
 ### Data acquisition - Flickr
 
@@ -40,25 +42,19 @@ The goodness of fit of the model was assessed by testing the prediction on 20% o
 | ----------------------- | ---- |
 | AUC                     | 0.89 |
 | R^2                     | 0.47 |
-| RMSE                    | <span style="color:red"> *0.36* </span>|
+| RMSE                    | 0.36 |
 
-<span style="color:red"> 0.36 </span>
+
+### Correlation between the predictors
 
 ![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/cor_circle.png)
 
 ![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/correlogram.png)
 
-As displayed, the annual mean temperature as well as the slope variables were correlated above the chosen threshold, so they were removed from the analysis. 
+As displayed, the annual mean temperature as well as the slope variables were correlated above the chosen threshold, so they were removed for the analysis. 
 
 Here are the importance of the variables in the model prediction: 
 
 ![VarimpPlot](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/VarimpPlot.png)
 
-The transportation network (paths and roads) as well as the settlement areas seem to be the most influencial for picture taking probability. We can examine the distribution of land use land cover classes according to photo locations on [this graph](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/barplot_LULC_photo_freq.R): 
-
-![Flickr_inat_LULC_sep](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/Flickr_inat_LULC_sep.png)
-
-
-
-We observe the same pattern as in the nodes from the RF. 
-
+The transportation network (paths and roads) as well as the settlement areas seem to be the most influencial for picture taking probability. 
