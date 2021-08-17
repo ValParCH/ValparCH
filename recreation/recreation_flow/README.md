@@ -1,10 +1,10 @@
 # Recreation - Flow modelling
 
-To get an estimation of the flow (or use) of the Recreation NCP, a distribution model is created based on [observation data](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/data) from two picture sharing websites (Flickr, Inaturalist) using a Random Forest regression. 
+To get an estimation of the flow (or use) of the outdoor recreation NCP, a distribution model is created based on [observation data](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/data) from two picture sharing websites (Flickr, Inaturalist) using a Random Forest regression. 
 
 ### Data acquisition - Flickr
 
-The geolocation of Flickr pictures is scraped for all of Switzerland and for the entire period (2006-2021) using an R code. This step requires an API key that is freely available on request on Flickr website. 
+The geolocation of Flickr pictures is scraped for all of Switzerland and for the entire period (2006-2021) using R. This step requires an API key that is freely available on request on Flickr website. 
 
 The pictures are gathered using keywords in French, German, Italian and English, that are determined based on most frequently used keywords related to "nature". Here is the list of the selected keywords: 
 
@@ -40,7 +40,7 @@ The goodness of fit of the model was assessed by testing the prediction on 20% o
 | ----------------------- | ---- |
 | AUC                     | 0.89 |
 | R^2                     | 0.47 |
-| RMSE                    | 0.36 |
+| RMSE                    | 0.36 |!!!
 
 ![](https://github.com/ValParCH/ValparCH/blob/main/recreation/recreation_flow/figs/cor_circle.png)
 
