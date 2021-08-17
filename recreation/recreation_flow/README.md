@@ -36,14 +36,13 @@ The model is then created (see [script](https://github.com/ValParCH/ValparCH/blo
 |                       | ·    Distance to roads (cats. 8-9-10-11, TLM3D, transformed to raster) |
 |                       | ·    LULC aggregated, 25 m focal window: Agriculture, forest,hydro, low vegetation, settlements |
 
-The goodness of fit of the model was assessed by testing the prediction on 20% of the dataset, and computing common metrics: 
+The goodness of fit of the model was assessed by testing the prediction on 20% of the dataset, and computing common metrics from which there are some:  
 
 | Correlation coefficient | 0.67 |
 | ----------------------- | ---- |
 | AUC                     | 0.89 |
 | R^2                     | 0.47 |
-| RMSE                    | 0.36 |
-
+| RMSE                    | 0.36 | 
 
 ### Correlation between the predictors
 
