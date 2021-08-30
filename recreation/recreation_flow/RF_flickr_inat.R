@@ -214,8 +214,14 @@ for (i in 1:k) {
   rrf <- tuneRF(train[, 2:ncol(train)], train[, 'pa'])
   mt <- trf[which.min(trf[,2]), 1]
   rrf <- randomForest(train[, 2:ncol(train)], train[, 'pa'], mtry=mt)
+  
+  tag<-paste("rrf",i,sep="_")
+  rrf_<-rrf
+  assign(tag,rrf)
+  
   e[[i]] <- evaluate(test[test$pa==1, ], test[test$pa==0, ], rrf)
 }
+
 
 print(e)
 
