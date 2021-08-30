@@ -200,10 +200,30 @@ rmse<-RMSE(pred_values,actual_values)
 
 # AUC
 
-plot(proj)
-eva <- evaluate(test[test$pa==1, ], test[test$pa==0, ], rrf)
-eva
-plot(eva, "ROC") # 0.8860
+k <- 5
+group <- kfold(d, k)
+group[1:10]
+
+unique(group)
+
+e <- list()
+for (i in 1:k) {
+  train <- d[group != i,] # training set
+  test <- d[group == i,] # testing set
+  
+  rrf <- tuneRF(train[, 2:ncol(train)], train[, 'pa'])
+  mt <- trf[which.min(trf[,2]), 1]
+  rrf <- randomForest(train[, 2:ncol(train)], train[, 'pa'], mtry=mt)
+  e[[i]] <- evaluate(test[test$pa==1, ], test[test$pa==0, ], rrf)
+}
+
+print(e)
+
+auc <- sapply(e, function(x){x@auc})
+cor_rf<- sapply(e,function(x){x@cor})
+mean(auc) # 0.88
+mean(cor_rf) # 0.66
+
 
 #For classification model: 
 require(pROC)
