@@ -40,9 +40,9 @@ The goodness of fit of the model was assessed by testing the prediction on 20% o
 
 | Correlation coefficient | 0.67 |
 | ----------------------- | ---- |
-| AUC of ROC                     | 0.89 |
-| R^2                     | 0.47 |
-| nRMSE                    | 0.36 | 
+| AUC of ROC                     | 0.88 |
+| R^2                     | 0.44 |
+| MSE                    | 0.14 | 
 
 ### Correlation between the predictors
 
