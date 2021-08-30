@@ -128,11 +128,13 @@ M<-cor(d)
 corrplot(M, method="circle", type= "upper")
 corrplot(M, method="number", type= "upper")
 
-#I remove one of each variables with >0.8 correlation, i.e. Slope and mean annual temperature
+# remove one of each variables with >0.8 correlation
+
+#slope, temp
 d<-d[,-c(2,4)]
 pred<- dropLayer(pred, c(1,3))
 
-# dividing in training and testing sets (80/20)
+# dividing in training and testing sets (80/20) (for first run of model)
 
 k <- 5
 group <- kfold(d, k)
@@ -147,7 +149,7 @@ for (i in 1:k) {
 }
 
 
-#--- Fitting cart model
+# - Fitting cart model
 library(rpart)
 cart <- rpart(pa~., data=d)
 printcp(cart)
@@ -158,11 +160,11 @@ plot(cart, uniform=TRUE, main="Regression Tree")
 text(cart, cex=.8, digits=1)
 
 
-#--- fitting random forest
+#---- fitting random forest
 
 library(randomForest)
 
-#--classification (the final chosen model is the regression model)
+#--classification
 fpa <- as.factor(train[, 'pa'])
 crf <- randomForest(train[, 2:ncol(train)], fpa)
 crf
@@ -171,40 +173,12 @@ varImpPlot(crf)
 
 #--regression
 
-trf <- tuneRF(train[, 2:ncol(train)], train[, 'pa'])
-mt <- trf[which.min(trf[,2]), 1]
-mt
-
-rrf <- randomForest(train[, 2:ncol(train)], train[, 'pa'], mtry=mt)
-rrf
-plot(rrf)
-varImpPlot(rrf)
-
-#-- predicting for swiss extent
-
-proj_crf<- predict(pred, crf,type = "prob") #classification model
-proj_rrf<- predict(pred, rrf, type ="response") #regression model
-
-#--evaluating the models
-
-#rrf
-# RMSE
-pred_values = predict(rrf,test)
-actual_values = test$pa
-
-rmse<-RMSE(pred_values,actual_values)
-
-#R squared
-
-1 - sum((actual_values-pred_values)^2)/sum((actual_values-mean(actual_values))^2)
-
-# AUC
-
 k <- 5
 group <- kfold(d, k)
 group[1:10]
 
 unique(group)
+rf_list<-NA
 
 e <- list()
 for (i in 1:k) {
@@ -216,12 +190,44 @@ for (i in 1:k) {
   rrf <- randomForest(train[, 2:ncol(train)], train[, 'pa'], mtry=mt)
   
   tag<-paste("rrf",i,sep="_")
-  rrf_<-rrf
   assign(tag,rrf)
+  rf_list[i]<-tag
   
   e[[i]] <- evaluate(test[test$pa==1, ], test[test$pa==0, ], rrf)
 }
 
+
+plot(rrf)
+varImpPlot(rrf)
+
+#-- predicting
+
+proj_crf<- predict(pred, crf,type = "prob")
+proj_rrf<- predict(pred,rrf, type ="response")
+
+#--evaluating the models
+#rrf
+# RMSE
+
+mods<- list(rrf_1,rrf_2,rrf_3,rrf_4,rrf_5)
+
+mean(mods[1]$rsq)
+
+rsq<-NA
+for(i in 1:length(mods)){
+rsq[i]<-mean(mods[[i]]$rsq)
+}
+
+mse<-NA
+for(i in 1:length(mods)){
+  mse[i]<-mean(mods[[i]]$mse)
+}
+
+mean(rsq)#0.44
+mean(mse)#0.14
+
+
+# AUC
 
 print(e)
 
@@ -232,10 +238,10 @@ mean(cor_rf) # 0.66
 
 
 #For classification model: 
-require(pROC)
-rf.roc<-roc(train$pa,crf$votes[,2])
-plot(rf.roc)
-auc(rf.roc) # 0.8942
+#require(pROC)
+#rf.roc<-roc(train$pa,crf$votes[,2])
+#plot(rf.roc)
+#auc(rf.roc) # 0.8942
 
 #-- exporting
 
