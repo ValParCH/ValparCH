@@ -1,47 +1,115 @@
-library(pxR)
 library(sf)
-library(tigris)
 library(raster)
+library(rgdal)
+library(pxR)
 
-wd<-setwd("C:/Users/kuelling/Documents/VALPAR/DATA/forestry_CH")
+wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/material_assistance/wood_flow"
+setwd(wd)
+
+
+
+#--- Define scratch and result workspace
+
+scratch<- paste(wd,"scratch",sep="/")
+dir.create(paste(scratch,"lulc_clip",sep="/"))
+result<- paste(wd,"results", sep="/")
+
+
+#--- Loading local variables
+
+# for part 1: 
+prodreg<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss_Regions_SHP\\PRODREG.shp") #production regions from CH
+lulc<- raster("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\UNIL_data\\lulc\\LULC_92-95_25.tif")#LULC raster
+cantons<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss boundaries\\swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp") #cantons boundaries
+
+# for part 2:
+
+pt<- "C:/Users/kuelling/Documents/VALPAR/DATA/forestry_CH" #BNS forestry file, ref "px-x-0703010000_102.px", wood harvest in m^3
+
+
+####################################################################################
+#### ---- Part 1: creating separated raster files corresponding to production region
+####################################################################################
+
+
+
+#--- Overlay of cantons and production regions, creating new shapfile
+
+reg_cant<-intersect(prodreg, cantons)
+
+#--- Process: processing of attribute table
+# i.    Creating a new column reg_cant table(reg_cant_n), containing Region + canton number
+# ii.   Filling the new column with concatenation of Region + canton
+# iii.  remove accents
+
+for(i in 1:nrow(reg_cant@data)){
+reg_cant@data$reg_cant_n[i]<-paste(reg_cant@data$ProdregN_1[i], reg_cant@data$KANTONSNUM[i], sep="_")
+}
+
+reg_cant@data$reg_cant_n<- gsub("Ã©", "e", reg_cant@data$reg_cant_n) # removing weird accents
+reg_cant@data$reg_cant_n<- gsub(" ", "", reg_cant@data$reg_cant_n) # removing tabs
+
+
+#--- clipping lulc raster to each production region and canton
+
+list_reg_cant<-data.frame(unique(reg_cant@data$reg_cant_n))
+
+
+for(i in 1:nrow(list_reg_cant)){
+  
+  name<-list_reg_cant$unique.reg_cant.data.reg_cant_n.[i]
+  a<-reg_cant[reg_cant$reg_cant_n == name,]
+  b<-crop(lulc,a)
+  c<-mask(b,a)
+  
+  writeRaster(c,paste(scratch,"lulc_clip",paste(name,".tif",sep=""),sep="/"))
+  print(paste("raster", name,"created", i, "/",length(unique(reg_cant@data$reg_cant_n)),sep =" "))
+}
+
+
+
+################################################################################
+#### ---- Part 2: Extracting values of wood harvest from Statistical office data
+################################################################################
+
+
+#--- Import px file (needs some adjustement due to format)
+
 file<-"px-x-0703010000_102.px"
 
-##### import px files from BFS:
-
-#Read in file an convert encoding
-x <- iconv(readLines(paste(wd, file, sep="/"), encoding="CP1252 "), from="CP1252 ", to="Latin1", sub="")
+#Read in file and convert encoding
+x <- iconv(readLines(paste(pt, file, sep="/"), encoding="CP1252 "), from="CP1252 ", to="Latin1", sub="")
 
 #Replace missings to workaround a bug in pxR.
 x <- gsub("\"......\"", "\"....\"", x, fixed = TRUE)
 x <- gsub("\".....\"", "\"....\"", x, fixed = TRUE)
 
 #Write the file with the changes
-fileConn<-file(paste(wd, file, sep="/"))
+fileConn<-file(paste(pt, file, sep="/"))
 writeLines(x, con=fileConn, useBytes = TRUE)
 close(fileConn)
 
-data = read.px(file, na.strings = c('"."','".."','"..."','"...."','"....."','"....."','":"'))
+data = read.px(paste(pt,file,sep="/"), na.strings = c('"."','".."','"..."','"...."','"....."','"....."','":"'))
 table= as.data.frame(data, use.codes = TRUE) # use.codes = F to see the names (in DE)
 names(table) <- c("observation_unit", "wood_sp_group","owner_type","canton", "forest_zone","year","value")
 
 table2= as.data.frame(data, use.codes = FALSE) # use.codes = F to see the names (in DE)
 list_cantons<- unique(table2$Kanton)
 
-######################################
 
+#--- Get cantonal values for year 92-97
 
-wd<-setwd("C:/Users/kuelling/Documents/VALPAR/ES Assessment/material_assistance/wood_flow")
-
-
-#get cantonal values for 92-97
-
+# setting the data frame by keeping only useful values
 
 subs<- subset(table, table$year == "1992" | table$year == "1993" | table$year == "1994" | table$year == "1995" | table$year == "1996" | table$year == "1997")
-subs<-subset(subs, subs$owner_type == 0)# meaning both private and public
+subs<- subset(subs, subs$owner_type == 0)# meaning both private and public
 subs<- subset(subs, subs$wood_sp_group == 0) # meaning both deciduous and coniferous
 subs<- subset(subs, subs$observation_unit == "_1" | subs$observation_unit == "_2")#wood for timber or industry (not energy)
-subs<- subset(subs, subs$canton != 0) # "0" means all switzerland, so we remove it
+subs<- subset(subs, subs$canton != 0) # "0" means all switzerland, so we remove it (redundant)
 subs<- subset(subs, subs$forest_zone != 0) # "0" means all switzerland, so we remove it
+
+
+# creating and empty data frame with a row per canton
 
 cant<-c(1:26)
 prod_reg1<-NA
@@ -50,11 +118,14 @@ prod_reg3<-NA
 prod_reg4<-NA
 prod_reg5<-NA
 tot_prod<-NA
+
 ndf<-data.frame(cant,prod_reg1,prod_reg2, prod_reg3, prod_reg4, prod_reg5, tot_prod)
+
+#--summing values of wood harvest for each canton for each production region
 
 for(i in 1:nrow(ndf)){
   a<-ndf$cant[i]
-  b<-subset(subs, subs$canton == a)
+  b<-subset(subs, subs$canton == a) 
   b$sum<-NA
   reg1<-subset(b, b$forest_zone == 1)
   reg2<-subset(b, b$forest_zone == 2)
@@ -71,6 +142,7 @@ for(i in 1:nrow(ndf)){
 }
 
 
+#---Creating a new df with 3 columns, and one row per Canton/prodreg/value of wood
 
 colnames(ndf)<- c("cant", "jura", "plateau", "prealpes", "alpes", "suddesalpes", "tot_prod")
 cantProd<-c("Jura", "Plateau", "Prealpes", "Alpes", "SuddesAlpes")
@@ -82,6 +154,7 @@ new_df$value<-NA
 
 colnames(new_df)<-c("prodreg", "cant", "value")
 
+#--- Filling the wood values
 
 for(i in 1:nrow(ndf)){
   a<- subset(ndf, ndf$cant == i)
@@ -95,13 +168,16 @@ for(i in 1:nrow(ndf)){
   }
 }
 
+#Remove NAs
 output_tab<-na.omit(new_df)
-output_tab$cant_reg<-NA
+output_tab$cant_reg<-NA #creating a tag column
 for(i in 1:nrow(output_tab)){output_tab$cant_reg[i]<-paste(output_tab$prodreg[i], output_tab$cant[i], sep= "")}
 
 
-### Now attributing to each raster layer the corresponding value
-#### FOR NOW: we give all forest pixel a divided value of production. this is a very rough spatial approximation 
+################################################################################
+#### ---- Part 3: Attributing to each raster layer and forest category the corresponding wood value, weighed
+################################################################################
+#### /!!!!!!!\ we give all forest pixel a divided value of production. this is a very rough spatial approximation 
 
 for(i in 1:nrow(output_tab)){
   
@@ -164,7 +240,3 @@ writeRaster(bind,(paste(wd,"results","Wood_harvest_92-97", sep="/")), format="GT
 
 bind_ind<- bind/maxValue(bind)
 writeRaster(bind_ind,(paste(wd,"results","Wood_harvest_92-97_index", sep="/")), format="GTiff",overwrite = TRUE)
-
-
-
-
