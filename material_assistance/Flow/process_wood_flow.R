@@ -21,6 +21,7 @@ result<- paste(wd,"results", sep="/")
 prodreg<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss_Regions_SHP\\PRODREG.shp") #production regions from CH
 lulc<- raster("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\UNIL_data\\lulc\\LULC_92-95_25.tif")#LULC raster
 cantons<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss boundaries\\swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp") #cantons boundaries
+slope<- slope #from Unil data slope mean
 
 # for part 2:
 
@@ -43,11 +44,23 @@ reg_cant<-intersect(prodreg, cantons)
 # iii.  remove accents
 
 for(i in 1:nrow(reg_cant@data)){
-reg_cant@data$reg_cant_n[i]<-paste(reg_cant@data$ProdregN_1[i], reg_cant@data$KANTONSNUM[i], sep="_")
+reg_cant@data$reg_cant_n[i]<-paste(reg_cant@data$ProdregN_1[i], reg_cant@data$KANTONSNUM[i], sep="")
 }
 
 reg_cant@data$reg_cant_n<- gsub("Ã©", "e", reg_cant@data$reg_cant_n) # removing weird accents
 reg_cant@data$reg_cant_n<- gsub(" ", "", reg_cant@data$reg_cant_n) # removing tabs
+
+#--- combining lulc and slope raster, to later keep only forests that arent on slope too steep
+
+
+#- reclassifying slope pixels that are in a slope < 110%  (47 degree) (Dupire et al. 2015)
+
+l_m <- c(0,47, 0,    #Too steep= value of 1000, ok= Value of 0
+         47,Inf,1000)
+mat_s <- matrix(l_m,ncol = 3, byrow=TRUE)
+s_prac<-reclassify(slope, mat_s)
+
+lulc<-lulc+s_prac #adding to the lulc raster
 
 
 #--- clipping lulc raster to each production region and canton
@@ -65,6 +78,7 @@ for(i in 1:nrow(list_reg_cant)){
   writeRaster(c,paste(scratch,"lulc_clip",paste(name,".tif",sep=""),sep="/"))
   print(paste("raster", name,"created", i, "/",length(unique(reg_cant@data$reg_cant_n)),sep =" "))
 }
+
 
 
 
@@ -179,6 +193,8 @@ for(i in 1:nrow(output_tab)){output_tab$cant_reg[i]<-paste(output_tab$prodreg[i]
 ################################################################################
 #### /!!!!!!!\ we give all forest pixel a divided value of production. this is a very rough spatial approximation 
 
+
+
 for(i in 1:nrow(output_tab)){
   
   
@@ -188,20 +204,23 @@ for(i in 1:nrow(output_tab)){
   print(paste(name, ", wood qtity (m^3):", val_prod,sep=" "))
   
   namext<-paste(name,".tif",sep="")
-  rast<-raster(paste(wd,"process","scratch","rasters",namext,sep="/"))
+  rast<-raster(paste(wd,"scratch","lulc_clip",namext,sep="/"))
   area_siz<-tapply(area(rast), rast[], sum)
   
   wood_surface<-sum(area_siz[c("9","10","11","13","14","18","19")],na.rm=TRUE)
   val<-(val_prod*625)/wood_surface
   
-  list1<-c(10,val,11,val,13,val,14,val,18,val,19,val,9,val,12,0,15,0,16,0,48,0,81,0,82,0,86,0,96,0,71,0,72,0,73,0,75,0,76,0,78,0,87,0,89,0,97,0,91,0,92,0,95,0,31,0,33,0,34,0,35,0,36,0,37,0,38,0,41,0,61,0,62,0,63,0,64,0,65,0,66,0,45,0,46,0,47,0,49,0,51,0,52,0,53,0,54,0,56,0,67,0,68,0,59,0,90,0,99,0,83,0,84,0,85,0,88,0)
+  list0<-c(20,Inf, 100)
+  mat0<- matrix(list0, ncol= 3, byrow= TRUE)
+  newrast0<-reclassify(rast,mat0)
+  
+  list1<-c(9,val,10,val,11,val,12,0,13,val,14,val,15,0,16,0,18,val,19,val,100,0)
   mat<- matrix(list1,ncol = 2, byrow=TRUE)
   
-  newrast<-reclassify(rast,mat)
+  newrast<-reclassify(newrast0,mat)
   
   exp_name<-paste(name,"reclass",sep="_")
   writeRaster(newrast,(paste(wd,"rast_recl",exp_name, sep="/")), format="GTiff")
-  
   
   print(paste(exp_name, "done",sep=" "))
   print(paste("process done at ", round((i*100)/nrow(output_tab)),"%"))
