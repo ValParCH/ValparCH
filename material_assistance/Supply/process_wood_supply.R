@@ -5,12 +5,77 @@
 library(data.table)
 library(raster)
 library(rgdal)
+library(stars)
 
-wd<-setwd("C:/Users/kuelling/Documents/VALPAR/ES Assessment/material_assistance/wood_supply")
-reg<-fread(paste(wd,"Biophysical_tables_92-97","c_gain_9297.csv",sep="/"))
+wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/material_assistance/wood_supply"
+setwd(wd)
+
+#---- loading local variables
+
+reg<-fread(paste(wd,"Biophysical_tables","c_gain_9297.csv",sep="/")) #carbon gain tables from national GHG inventory
+prodreg<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss_Regions_SHP\\PRODREG.shp") #production regions from CH
+lulc<- raster("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\UNIL_data\\lulc\\LULC_92-95_25.tif")#LULC raster
+dem<-raster("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\DEM(unil)\\DEM_mean_LV95.tif")
+slope<- slope # from unil data slope mean 
+
+scratch<- paste(getwd(), "scratch",sep="/")
+
+#####--- Part 1. :  creating individual rasters based on elevation and region
+
+# reclassification of DEM:
+
+m1<- c(0,600, 1, 
+      600,1200, 2,
+      1200,Inf, 3)
+m11 <- matrix(m1,ncol = 3, byrow=TRUE)
+
+dem_r<-reclassify(dem, m11)
+
+# transforming raster to polygon
+dem_p <- sf::as_Spatial(sf::st_as_sf(stars::st_as_stars(dem_r), as_points = FALSE, merge = TRUE)) 
 
 
-#-----Attributing average carbon gain values
+# create new polygon intersecting elevation and region
+regelev<- intersect(dem_p, prodreg)
+
+
+for(i in 1:nrow(regelev@data)){
+  regelev@data$regelev_n[i]<-paste(regelev@data$ProdregN_1[i], regelev@data$DEM_mean_LV95[i], sep="")
+}
+
+regelev@data$regelev_n<- gsub("Ã©", "e", regelev@data$regelev_n) # removing weird accents
+regelev@data$regelev_n<- gsub(" ", "", regelev@data$regelev_n) # removing tabs
+
+#-combining lulc and slope raster, to later keep only forests that arent on slope too steep
+#- reclassifying slope pixels that are in a slope < 110%  (47 degree) (Dupire et al. 2015)
+
+l_m <- c(0,47, 0,    #Too steep= value of 1000, ok= Value of 0
+         47,Inf,1000)
+mat_s <- matrix(l_m,ncol = 3, byrow=TRUE)
+s_prac<-reclassify(slope, mat_s)
+
+lulc<-lulc+s_prac #adding to the lulc raster
+
+
+#----Creating the rasters for each region
+
+list_reg_elev<-data.frame(unique(regelev@data$regelev_n))
+
+
+for(i in 1:nrow(list_reg_elev)){
+  
+  name<-list_reg_elev$unique.regelev.data.regelev_n.[i]
+  a<-regelev[regelev$regelev_n == name,]
+  b<-crop(lulc,a)
+  c<-mask(b,a)
+  
+  writeRaster(c,paste(scratch,"lulc_clip",paste(name,".tif",sep=""),sep="/"), overwrite = TRUE)
+  print(paste("raster", name,"created", i, "/",length(unique(regelev@data$regelev_n)),sep =" "))
+}
+
+
+
+#####-----Part 2. : Attributing average carbon gain values
 
 
 for(i in 1:nrow(reg)){
@@ -19,15 +84,20 @@ for(i in 1:nrow(reg)){
   
   print(paste(name, ", C value:", val,sep=" "))
   
-  list1<-c(10,val,11,val,13,val,14,val,18,val,19,val,9,val,12,0,15,0,16,0,48,0,81,0,82,0,86,0,96,0,71,0,72,0,73,0,75,0,76,0,78,0,87,0,89,0,97,0,91,0,92,0,95,0,31,0,33,0,34,0,35,0,36,0,37,0,38,0,41,0,61,0,62,0,63,0,64,0,65,0,66,0,45,0,46,0,47,0,49,0,51,0,52,0,53,0,54,0,56,0,67,0,68,0,59,0,90,0,99,0,83,0,84,0,85,0,88,0)
+  list0<-c(20,Inf, 100)
+  mat0<- matrix(list0, ncol= 3, byrow= TRUE)
+  
+  list1<-c(9,val,10,val,11,val,12,0,13,val,14,val,15,0,16,0,18,val,19,val,100,0)
   mat<- matrix(list1,ncol = 2, byrow=TRUE)
   
   namext<-paste(name,".tif",sep="")
-  rast<-raster(paste(wd,"rasters",namext,sep="/"))
-  newrast<-reclassify(rast,mat)
+  rast<- raster(paste(scratch,"lulc_clip",namext,sep="/"))
+  
+  newrast0<-reclassify(rast,mat0)
+  newrast<-reclassify(newrast0,mat)
   
   exp_name<-paste(name,"reclass",sep="_")
-  writeRaster(newrast,(paste(wd,"rast_recl",exp_name, sep="/")), format="GTiff")
+  writeRaster(newrast,(paste(scratch,"rast_reclass",exp_name, sep="/")), format="GTiff")
   
   
   print(paste(exp_name, "done!",sep=" "))
@@ -50,7 +120,7 @@ for(i in 1:nrow(reg)){
   name<-reg$name[i]
   imp_name<-paste(name,"reclass",sep="_")
   imp_name<-paste(imp_name,".tif",sep="")
-  nr<-raster(paste(wd,"rast_recl",imp_name,sep="/"))
+  nr<-raster(paste(scratch,"rast_reclass",imp_name,sep="/"))
   
   bind<-mosaic(bind,nr,fun=mean,tolerance=0.05)
   print(paste(imp_name, " added"))
@@ -66,7 +136,5 @@ writeRaster(bind,(paste(wd,"results","C_gain_92-97", sep="/")), format="GTiff",o
 bind_ind<- bind/maxValue(bind)
 
 writeRaster(bind_ind,(paste(wd,"results","C_gain_92-97_index", sep="/")), format="GTiff",overwrite = TRUE)
-
-
 
 
