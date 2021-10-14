@@ -4,9 +4,9 @@ Here is the code and main references used to process data and run natcap InVEST 
 
 ### Workflow
 
-The swiss territory is divided in 3 categories, relative to altitude (<601m, 601-1200m,>1200m) and then again in 5 categories, relative to swiss production regions ("Alpes, Plateau, Sud des Alpes, Préalpes and Jura") (1_Process_carbon.py)
+The swiss territory is divided in 3 categories, relative to altitude (<601m, 601-1200m,>1200m) and then again in 5 categories, relative to swiss production regions ("Alpes, Plateau, Sud des Alpes, Préalpes and Jura") (1_Process_carbon.R)
 
-Individual InVEST models are run on each area (altitude + production region) (2_InVEST_carbon.py) and then bonded together (3_Process_carbon.py). 
+Individual InVEST models are run on each area (altitude + production region) (2_InVEST_carbon.py) and then bonded together (3_Process_carbon.R). 
 
 #### Biophysical table.csv
 
