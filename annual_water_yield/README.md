@@ -32,3 +32,4 @@ Z Value per subwatershed:
 | median | 26.61         |
 | range  | 15.16 - 33.49 |
 
+![](https://github.com/ValParCH/ValparCH/blob/main/annual_water_yield/figs/subwsheds_Z.png)
