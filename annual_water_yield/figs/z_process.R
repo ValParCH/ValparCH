@@ -15,10 +15,6 @@ scratch<- paste(wd, "scratch", sep="/")
 ####
 list_st<-fread("C:/Users/kuelling/Documents/VALPAR/DATA/weather_stations/liste_stations.csv")
 data<-fread("normes_climatologiques_81-2010.csv")
-
-dem<- raster("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\DEM(unil)\\DEM_mean_LV95.tif")
-prodreg<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss_Regions_SHP\\PRODREG.shp") #production regions from CH
-
 sheds<-readOGR("C:/Users/kuelling/Documents/VALPAR/ES Assessment/Annual water yield/older/HADES/Medium_watershed/a0201_bilanzv1_0.shp")
 
 ####
