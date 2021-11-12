@@ -7,8 +7,8 @@ library(RCurl)
 
 # local
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/other/google_vision"
-flick_dt<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/other/flickr/flickr_keywords_06-21_CH.csv"
+wd<-".../google_vision"
+flick_dt<-".../flickr_keywords_06-21_CH.csv"
 setwd(wd)
 
 # flickr data
