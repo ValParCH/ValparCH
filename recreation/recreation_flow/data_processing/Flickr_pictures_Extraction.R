@@ -1,0 +1,62 @@
+library(progress)
+#devtools::install_github("nfox29/photosearcher")
+library(photosearcher)
+
+
+wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/other/Flickr"
+setwd(wd)
+
+#-- Setting API Key from Flickr
+
+api_key = "206413bd47bac2634aa8d667cf28b968"
+CH_polygon_path<-"C:/Users/kuelling/Documents/VALPAR/DATA/Swiss boundaries/Switzerland_noliechsten.shp"
+
+#-- Setting research terms
+
+datestart = "2006-01-01"
+datestop = "2021-01-01"
+
+#bb = "5.835645,45.73923,10.64321,47.83945" # swiss bounding box
+#bb= "6.443481,46.491168,6.778564,46.623299" # Lausanne
+swissbb<- sf::st_read(CH_polygon_path) # region of interest
+
+tag_list = c("mountains","montagn*", "berg*", "foret*", "foresta", "wald", "natur*", "landschaft", "paysage", "paesaggio", "landscape")
+
+
+
+#-- creating an empty dataframe to be filled
+
+list_query<-NA
+
+#-- scraping all pictures (Runtime  ~2h)
+
+for(i in 1:length(tag_list)){
+  a<-tag_list[i]
+  b<- photo_search(
+    mindate_taken = datestart,
+    maxdate_taken = datestop,
+    text = a,
+    #bbox = bb,
+    sf_layer = swissbb,
+    has_geo = TRUE) 
+  list_query_CH<-rbind(list_query_CH,b)
+  print(paste(((i*100)/length(tag_list)),"%",sep=" "))
+}
+
+#-- Export
+
+write.csv(list_query_CH,paste(wd,"flickr_keywords_06-21_CH.csv",sep="/"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
