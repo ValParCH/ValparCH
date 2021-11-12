@@ -6,10 +6,10 @@ library(FedData)
 
 #local
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/other/google_vision/inat"
+wd<-".../inat"
 setwd(wd)
 
-fold<-"C:/Users/kuelling/Documents/VALPAR/DATA/Inaturalist"
+fold<-".../DATA/Inaturalist"
 
 #--binding raw data exports
 
