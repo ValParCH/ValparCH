@@ -3,13 +3,13 @@ library(progress)
 library(photosearcher)
 
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Recreation/Pictures/other/Flickr"
+wd<-".../Flickr"
 setwd(wd)
 
 #-- Setting API Key from Flickr
 
-api_key = "206413bd47bac2634aa8d667cf28b968"
-CH_polygon_path<-"C:/Users/kuelling/Documents/VALPAR/DATA/Swiss boundaries/Switzerland_noliechsten.shp"
+api_key = ""
+CH_polygon_path<-"...Switzerland_noliechsten.shp"
 
 #-- Setting research terms
 
