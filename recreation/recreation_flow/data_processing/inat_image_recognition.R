@@ -50,7 +50,7 @@ print(s)
 ### ----- Google Vision - image recognition 
 
 #set up API access
-Sys.setenv(gvision_key = "AIzaSyABPVhmumihYft8dODfTSBqDj1nLC2MtvA") #Google vision API Key
+Sys.setenv(gvision_key = "") #Google vision API Key
 gvision_init()
 
 #search google vision for labels for Inaturalist /!!!!/ warning each request can cost the owner of the API KEY
