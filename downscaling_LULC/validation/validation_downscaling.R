@@ -87,8 +87,8 @@ comp_trim$LU25_NAME[i]<-labels$NAME[as.numeric(b)]
 
 fr_trim<-10 # defining the threshold
 
-sum(comp_trim[comp_trim$freq<=fr_trim,]$freq) #2381 misattributions
-sum(comp_trim[comp_trim$freq>fr_trim,]$freq) #95046 misattributions
+sum(comp_trim[comp_trim$freq<=fr_trim,]$freq) #2381 misattributions 
+sum(comp_trim[comp_trim$freq>fr_trim,]$freq) #95046 misattributions remaining
 
 comp_trim<-comp_trim[comp_trim$freq>fr_trim,]
 
