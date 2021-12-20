@@ -6,7 +6,7 @@ library(data.table)
 library(RColorBrewer)
 library(pals)
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/Downscaling/validation"
+wd<-"C:/Users/..." #working directory
 
 setwd(wd)
 
@@ -14,13 +14,13 @@ setwd(wd)
 #-1 data to load
 
 #Downscaled map to test
-lu25<-raster("C:/Users/kuelling/Documents/VALPAR/Downscaling/results/2018/LULC_25_2018_v3.tif")
+lu25<-raster("C:/Users/.../LULC_25_2018_v3.tif")
 
 #OFS statistiques de la superficie (GEOSTAT)
-areal<-fread("C:/Users/kuelling/Documents/VALPAR/Downscaling/Nathan/OFS/gd-b-00.03-36-noas04P/AREA_NOAS04_72_191202.csv")
+areal<-fread("C:/Users/.../AREA_NOAS04_72_191202.csv")
 
-#Labels from 72 categories GEOSTAT
-labels<-fread("C:/Users/kuelling/Documents/VALPAR/DATA/OFS_GEOSTAT/labels_EN.csv")
+#Labels from 72 categories GEOSTAT (available in this github repository)
+labels<-fread("C:/Users/.../labels_EN.csv")
 
 #-2 Data processing
 
