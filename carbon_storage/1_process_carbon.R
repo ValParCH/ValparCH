@@ -1,23 +1,36 @@
 
+
 library(raster)
 library(stars)
 library(rgdal)
 library(sf)
 
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Carbon sequestration/Automatisation/git"
+#--- Folder paths
+
+wd<-"C:/Users/..."
 setwd(wd)
 
-#--- loading Local variables
-
-dem<- raster("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\DEM(unil)\\DEM_mean_LV95.tif")
-prodreg<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss_Regions_SHP\\PRODREG.shp") #production regions from CH
-lulc<- raster("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\UNIL_data\\lulc\\LULC_92-95_25.tif")#LULC raster
-
-
-scratch<- paste(wd, "scratch", sep="/")
 dir.create(paste(scratch,"lulc_clip",sep="/"))
-results<- paste(wd, "results", sep="/")
+
+scratch<-paste(wd,"scratch",sep="/")
+
+dir.create(paste(scratch,"lulc_clip","97",sep="/"))
+dir.create(paste(scratch,"lulc_clip","09",sep="/"))
+dir.create(paste(scratch,"lulc_clip","18",sep="/"))
+dir.create(paste(scratch,"Invest_models",sep="/"))
+
+
+#--- loading Local variables STATIC
+
+dem<- raster("C:\\Users...\\DEM_mean_LV95.tif") #DEM Raster from swisstopo, aggregated at 25m 
+prodreg<- readOGR("C:\\Users...\\PRODREG.shp") #production regions from CH
+
+#--- loading Local variables TEMPORAL
+
+lulc97<- raster("C:/Users/.../LU-CH_1997.tif")#LULC raster
+lulc09<- raster("C:/Users/.../LU-CH_2009.tif")#LULC raster
+lulc18<- raster("C:/Users/.../LU-CH_2018.tif")#LULC raster
 
 #--- reclassify DEM 
 
@@ -41,12 +54,19 @@ for(i in 1:nrow(regelev@data)){
   regelev@data$regelev_n[i]<-paste(regelev@data$ProdregN_1[i], regelev@data$DEM_mean_LV95[i], sep="")
 }
 
-regelev@data$regelev_n<- gsub("é", "e", regelev@data$regelev_n) # removing weird accents
+#WARNING: the first character will not be saved by R, has to be rewritten
+
+regelev@data$regelev_n<- gsub("Ã©", "e", regelev@data$regelev_n) # removing weird accents
 regelev@data$regelev_n<- gsub(" ", "", regelev@data$regelev_n) # removing tabs
 
+
+# Function to apply to each LULC map
 #--- reclassifying the lulc map in 18 categories
 
-m<-c(9,1,10,1,11,1,12,2,13,1,14,1,15,2,16,1,17,1,18,6,19,1,20,17,21,12,23,12,24,12,25,12,26,12,27,12,28,12,29,12,31,12,32,13,33,12,34,12,35,12,36,12,37,12,38,13,41,12,45,12,46,12,47,12,48,12,49,12,51,13,52,14,53,13,54,13,56,13,59,15,61,12,62,12,63,12,64,12,65,12,66,12,67,13,68,13,69,17,71,5,72,5,73,5,75,7,76,7,77,7,78,7,81,18,82,3,83,18,84,4,85,18,86,4,87,18,88,18,89,13,90,16,91,10,92,10,93,12,95,11,96,13,97,9,98,12,99,16)
+rast_function_regelev<-function(lulc,year){
+
+m<-c(0,0,1,12,2,12,3,12,4,12,5,12,6,12,7,12,8,12,9,12,10,12,11,12,12,12,13,12,14,12,15,12,16,13,17,12,18,13,19,12,20,12,21,13,22,12,23,13,24,12,25,12,26,12,27,12,28,12,29,12,30,12,31,15,32,13,33,13,34,13,35,13,36,13,37,7,38,7,39,5,40,3,41,3,42,18,43,18,44,4,45,18,46,18,47,4,48,8,49,18,50,1,51,1,52,0,53,1,54,1,55,1,56,2,57,2,58,2,59,1,60,2,61,10,62,10,63,12,64,4,65,9,66,12,67,11,68,9,69,16,70,16,71,18,72,16)
+
 m1 <- matrix(m,ncol = 2, byrow=TRUE)
 
 lulc_r<-reclassify(lulc, m1)
@@ -55,7 +75,6 @@ lulc_r<-reclassify(lulc, m1)
 
 list_reg_elev<-data.frame(unique(regelev@data$regelev_n))
 
-
 for(i in 1:nrow(list_reg_elev)){
   
   name<-list_reg_elev$unique.regelev.data.regelev_n.[i]
@@ -63,10 +82,15 @@ for(i in 1:nrow(list_reg_elev)){
   b<-crop(lulc_r,a)
   c<-mask(b,a)
   
-  writeRaster(c,paste(scratch,"lulc_clip",paste(name,".tif",sep=""),sep="/"), overwrite = TRUE)
+  NAvalue(c)<-255
+  
+  writeRaster(c,paste(scratch,"lulc_clip",year,paste(name,".tif",sep=""),sep="/"), overwrite = TRUE, NAflag  = 255)
   print(paste("raster", name,"created", i, "/",length(unique(regelev@data$regelev_n)),sep =" "))
 }
+}
 
+#----Applying function to each year, runtine 10min each
 
-
-
+rast_function_regelev(lulc97,"97")
+rast_function_regelev(lulc09,"09")
+rast_function_regelev(lulc18,"18")
