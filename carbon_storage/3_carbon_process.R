@@ -2,20 +2,41 @@ library(raster)
 library(rgdal)
 library(sf)
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Carbon sequestration/Automatisation/git"
+wd<-"C:/Users/.../CODE"
 setwd(wd)
 
 
-#--- Load local variables and paths
-#folder containing Invest models
-in_folder<- "C:/Users/kuelling/Documents/VALPAR/ES Assessment/Carbon sequestration/Automatisation/git/scratch/Invest_models"
-results<- paste(wd, "results", sep="/")
+#--- folders for each temporal analysis
+
+#data
+fold97<-paste(wd,"scratch/Invest_models/97",sep="/")
+fold09<-paste(wd,"scratch/Invest_models/09",sep="/")
+fold18<-paste(wd,"scratch/Invest_models/18",sep="/")
+
+#output results folder
+
+res97<-"C:/Users.../SUPPLY/97"
+res09<-"C:/Users.../SUPPLY/09"
+res18<-"C:/Users.../SUPPLY/18"
+
+#output names
+
+n97<-"CAR_S_CH_97.tif"
+n09<-"CAR_S_CH_09.tif"
+n18<-"CAR_S_CH_18.tif"
+
+
+#--- Function to do for each time period
+
+carbon_process_3<-function(in_folder, results, name_out){
+
 
 #--- move all final outputs to new folder
 
 list_files<-list.files(in_folder)
 dir.create(paste(in_folder,"tot_c_united",sep="/"))
 
+print("directory created")
 
 for(i in 1:length(list_files)){
   print(list_files[i])
@@ -26,6 +47,7 @@ for(i in 1:length(list_files)){
   file.copy(path2,paste(in_folder,"tot_c_united",sep="/"))
 }
 
+print("files copied")
 
 #--- bind together each file
 
@@ -40,11 +62,6 @@ origin(bind)<-0
 
 list_lu<- list.files(paste(in_folder,"tot_c_united",sep="/"))
 
-
-#### PROBLEM IN THE BINDING; linked to the NA values, need to calibrate the mosaic function
-
-
-
 for(i in 1:length(list_lu)){
   name<-list_lu[i]
   nr<-raster(paste(in_folder,"tot_c_united",name,sep="/"))
@@ -55,4 +72,13 @@ for(i in 1:length(list_lu)){
 thecrs<-sp::CRS('+init=epsg:2056')
 crs(bind)<- thecrs
 
-writeRaster(bind,(paste(wd,"results","carbon_stored_92-97.tif", sep="/")), format="GTiff",overwrite = TRUE)
+writeRaster(bind,(paste(results,name_out, sep="/")), format="GTiff",overwrite = TRUE)
+
+print("final raster written")
+}
+
+#--- Applying for each period
+
+carbon_process_3(fold97,res97,n97)
+carbon_process_3(fold09,res09,n09)
+carbon_process_3(fold18,res18,n18)
