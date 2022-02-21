@@ -33,3 +33,8 @@ Z Value per subwatershed:
 | range  | 15.16 - 33.49 |
 
 ![](https://github.com/ValParCH/ValparCH/blob/main/annual_water_yield/figs/subwsheds_Z.png)
+
+
+### Validation data
+
+HADES [Bilan data](https://atlashydrologique.ch/produits/version-imprimee/bilan-hydrique/tableau6-3-1)
