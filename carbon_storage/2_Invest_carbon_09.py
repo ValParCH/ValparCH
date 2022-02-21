@@ -12,11 +12,11 @@ import natcap.invest.carbon, os, string # Requires to have all natcap.invest dep
 #------ Define paths to variables
 
 #Path to a folder containing biophysical tables for each region+altitude
-bp_tables_folder = r'C:\Users\kuelling\Documents\VALPAR\ES Assessment\Carbon sequestration\FINAL\SUPPLY\CODE\BPTABLE'
+bp_tables_folder = r'C:\Users\...\BPTABLE'
 #Path to a folder containing LULC rasters for each region 
-lu_folder = r'C:\Users\kuelling\Documents\VALPAR\ES Assessment\Carbon sequestration\FINAL\SUPPLY\CODE\scratch\lulc_clip\09'
+lu_folder = r'C:\Users\...\CODE\scratch\lulc_clip\09'
 #Path to output folder containing each InVEST model
-output_folder = r'C:\Users\kuelling\Documents\VALPAR\ES Assessment\Carbon sequestration\FINAL\SUPPLY\CODE\scratch\Invest_models\09'
+output_folder = r'C:\Users\...\CODE\scratch\Invest_models\09'
 
 # Process: browsing through folders and defining names
 
