@@ -16,7 +16,7 @@ The land use / land cover categories are reclassified based on (table 6-6, FOEN,
 
 #### Digital elevation model.asc
 
-The digital elevation model (200m raster) was retrieved from swisstopo (2010)
+The digital elevation model was retrieved from swisstopo. swissALTI3D (2010)
 
 #### Swiss production regions
 
