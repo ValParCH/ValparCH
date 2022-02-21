@@ -32,4 +32,4 @@ FOEN. (2020b). Production regions NFI. Retrieved from https://opendata.swiss/en/
 
 Sharp, R., Douglass, J., Wolny, S., Arkema, K., Bernhardt, J., Bierbower, W., Chaumont, N., Denu, D., Fisher, D., Glowinski, K., Griffin, R., Guannel, G., Guerry, A., Johnson, J., Hamel, P., Kennedy, C., Kim, C.K., Lacayo, M., Lonsdorf, E., Mandle, L., Rogers, L., Silver, J., Toft, J., Verutes, G., Vogl, A. L., Wood, S, and Wyatt, K. 2020, InVEST 3.9.0.post156+ug.g13ead8f User’s Guide. The Natural Capital Project, Stanford University, University of Minnesota, The Nature Conservancy, and World Wildlife Fund.
 
-swisstopo. (2010). The digital height model of Switzerland with a 200m grid. Retrieved from https://opendata.swiss/en/dataset/das-digitale-hohenmodell-der-schweiz-mit-einer-maschenweite-von-200-m
+swisstopo. (2010). SwissAlti3D. Retrieved from https://www.swisstopo.admin.ch/en/geodata/height/alti3d.html
