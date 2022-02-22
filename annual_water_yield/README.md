@@ -7,11 +7,11 @@ The data used in this model is the following:
 | Data                            | Source                                                      |
 | ------------------------------- | ----------------------------------------------------------- |
 | Evapotranspiration Raster layer | CHclim25-Broennimann / evapotranspiration using Turc method |
-| LULC                            | Downscaled LULC map (25m) A. Lehmann                        |
+| LULC                            | Downscaled LULC map (25m) Fiuliani et al.2021               |
 | Plants available water content  | OFAG: Soil aptitudes                                        |
 | Root restricting depth          | OFAG: Soil aptitudes                                        |
 | Annual precipitations           | Bioclim Bio12, downscaled 25m (O. Broennimann)              |
-| Seasonality constant (z)        | see below                                                   |
+| Seasonality constant (z)        | 25 (see below)                                              |
 | Sub watersheds vector           | HADES A02 - medium catchments                               |
 | watersheds vector               | HADES A03 - river basins                                    |
 | Biophysical table               | see below                                                   |
