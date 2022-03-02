@@ -38,5 +38,8 @@ Z Value per subwatershed:
 ### Calibration/validation data
 
 the validation data is based on HADES [Bilan data](https://atlashydrologique.ch/produits/version-imprimee/bilan-hydrique/tableau6-3-1), and is compared with the InVEST water yield values from 1992-1997. The compared outputs are Water yield, precipitations, and evapotranspiration. The calibration was done to get the best fit with the wateryield values, as it is the aim of this part of the project
+
+The validation is done at the watershed level, but the final map gives values to the pixel (25m) which are approximations based on the watershed yield and the land use. 
+
 ![](https://github.com/ValParCH/ValparCH/blob/main/annual_water_yield/figs/v5_z25_kc175_plot.png)
 
