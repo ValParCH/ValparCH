@@ -2,10 +2,10 @@ wd<-setwd("C:/Users/kuelling/Documents/VALPAR/ES Assessment/Air quality regulati
 
 #-- Local variables (some rds files)
 
-pm10<-raster("C:/Users/kuelling/Documents/VALPAR/DATA/Meteotest/exported_data/pm10_2015_20m_modeled.tif")
+pm10<-raster("C:/Users/.../pm10_2015_20m_modeled.tif")
 lai<-LAI_mean
 #forest<-DLT_25_18 #1= deciduous, 2= coniferous, this is no longer used as coniferous/broadleaf are integrated in Lulc classes (see data processing_LULC script)
-lulc<-raster("C:/Users/kuelling/Documents/VALPAR/DATA/LULC_DLT/LULC_92-97_DLT.tif")
+lulc<-raster("C:/Users/...LULC_92-97_DLT.tif")
 
 template<-lulc
 #-- Result folder
