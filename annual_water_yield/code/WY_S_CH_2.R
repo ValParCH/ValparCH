@@ -5,10 +5,10 @@ library(raster)
 # values, and then export it to the right folder.
 #-------------
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Annual water yield/FINAL/SUPPLY/CODE"
+wd<-"C:/Users/..."
 setwd(wd)
 
-fold<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Annual water yield/FINAL/SUPPLY"
+fold<-"C:/Users/..."
 
 proc<-function(year){
   
