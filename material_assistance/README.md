@@ -13,15 +13,18 @@ the file C_gain_XXXX.csv comports the values averaged over the desired time peri
 
 The Flow of this NCP is estimated through official reports of Wood harvesting in switzerland over the desired period (FOEN, 2020a). Those harvest quantities (in m3) are attributed to Land use categories corresponding to productive forests :
 
-| Code | Name                                      |
-| ---- | ----------------------------------------- |
-| 9    | Forest fresh cuts                         |
-| 10   | Other forest                              |
-| 11   | Normal dense forest                       |
-| 13   | Open forest (agricultural areas)          |
-| 14   | Forest stripes                            |
-| 18   | Clusters of trees (on agricultural areas) |
-| 19   | Other woods                               |
+| Code | Name                          |
+| ---- | ----------------------------- |
+| 50   | Normal dense forest           |
+| 51   | Forest strips                 |
+| 52   | Afforestations                |
+| 53   | Felling areas                 |
+| 54   | Damaged forest areas          |
+| 55   | Open forest (agr. area)       |
+| 58   | Groves, hedges                |
+| 59   | Clusters of trees (agr. area) |
+
+
 
 the value attributed to those pixels is distributed according to the Canton and the production region. This estimation is quite coarse. Comparing the dataset of forest surface from FOEN (2020b) with the surface obtained from the LULC map with those 7 categories: 
 
