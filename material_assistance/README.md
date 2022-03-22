@@ -29,7 +29,7 @@ The Flow of this NCP is estimated through official reports of Wood harvesting in
 the value attributed to those pixels is distributed according to the Canton and the production region. This estimation is quite coarse. Comparing the dataset of forest surface from FOEN (2020b) with the surface obtained from the LULC map with those 7 categories: 
 
 
-| LULC map(1992-1997 (ha) | FOEN dataset (ha), average over 1992-1997 | Difference (ha) |
+| LULC map (1992-1997 (ha) | FOEN dataset (ha), average over 1992-1997 | Difference (ha) |
 | ------------- | ----------------------------------------- | --------------- |
 | 1069573       | 1060297                                   | 9276            |
 
