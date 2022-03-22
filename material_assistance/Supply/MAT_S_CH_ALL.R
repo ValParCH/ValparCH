@@ -183,3 +183,9 @@ print(paste("raster ",resname," created",sep=""))
 process_part_2(reg97,"97",Res97)
 process_part_2(reg09,"09",Res09)
 process_part_2(reg18,"18",Res18)
+
+#-- getting area of forest (careful to load lulc value with terra and not raster)
+
+mat_area<-terra::global(lulc97==c(50,51,52,53,54,55,58,59), sum, na.rm=TRUE)
+
+forest_ha<-(sum(mat_area)*625)/10000 # getting ha insteand of square meters
