@@ -10,22 +10,27 @@ Here are the codes designed to produce the "threat layers" needed for the natcap
 
    composed of secondary roads (TLM3D codes: 10,11)
 
-3. ### **urban**
+3. ### **residential**
 
    comprises the following LULC categories: 
 
-   | Code | Name                                        |
-   | ---- | ------------------------------------------- |
-   | 34   | Parking areas                               |
-   | 35   | Railway station grounds                     |
-   | 38   | Airfields, green airport environs           |
-   | 41   | Industrial ground                           |
-   | 45   | Land around 25 (One- and two family houses) |
-   | 46   | Land around 26 (Terraced houses)            |
-   | 47   | Land around 27 (Blocks of flats)            |
-   | 48   | Land around 28 (Agricultural buildings)     |
-   | 49   | Land around 29 (Unspecified buildings)      |
-   | 53   | Camping, caravan sites                      |
+| Code | Name                                                 |
+| ---- | ---------------------------------------------------- |
+| 1    | Industrial and commercial buildings                  |
+| 2    | Surroundings of industrial and commercial  buildings |
+| 3    | One- and two-family houses                           |
+| 4    | Surroundings of one- and two-family houses           |
+| 5    | Terraced houses                                      |
+| 6    | Surroundings of terraced houses                      |
+| 7    | Blocks of flats                                      |
+| 8    | Surroundings of blocks of flats                      |
+| 9    | Public buildings                                     |
+| 10   | Surroundings of public buildings                     |
+| 11   | Agricultural buildings                               |
+| 12   | Surroundings of agricultural buildings               |
+| 13   | Unspecified buildings                                |
+| 14   | Surroundings of unspecified buildings                |
+
 
    And is defined as being part of a municipality with either a population density of >100/km2 OR >10 000 inhabitants
 
@@ -36,16 +41,15 @@ Here are the codes designed to produce the "threat layers" needed for the natcap
 5. ### **crops**
 
    comprises the following LULC categories:
+   
+| Code | Name               |
+| ---- | ------------------ |
+| 37   | Intensive orchards |
+| 38   | Field fruit trees  |
+| 39   | Vineyards          |
+| 40   | Horticulture       |
+| 41   | Arable land        |
 
-   | Code | Name                               |
-   | ---- | ---------------------------------- |
-   | 71   | Regular vineyards                  |
-   | 72   | "Pergola" vineyards                |
-   | 73   | Extensive vines                    |
-   | 75   | Intensive orchards                 |
-   | 78   | Horticulture                       |
-   | 81   | Favourable arable land and meadows |
-   | 82   | Other arable land and meadows      |
 
    
 
@@ -53,4 +57,3 @@ Here are the codes designed to produce the "threat layers" needed for the natcap
 
 Layers roads are all produced together (same script), the same goes for urban and rural_residential.
 
-The codes are written in python 2.7 using the arcpy module
