@@ -3,26 +3,28 @@ library(raster)
 library(rgdal)
 library(pxR)
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/material_assistance/FINAL/SUPPLY/CODE"
+wd<-"C:/Users/...CODE"
 setwd(wd)
 
 #--local paths
 scratch<- paste(getwd(), "scratch",sep="/")
 #dir.create(paste(scratch,"lulc_clip_f",sep="/"))
 #dir.create(paste(scratch,"rast_reclass_f",sep="/"))
-result<- "C:/Users/kuelling/Documents/VALPAR/ES Assessment/material_assistance/FINAL/FLOW"
+result<- "C:/Users/.../FLOW"
 
 #--local variables
 
-prodreg<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss_Regions_SHP\\PRODREG.shp") #production regions from CH
-cantons<- readOGR("C:\\Users\\kuelling\\Documents\\VALPAR\\DATA\\Swiss boundaries\\swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp") #cantons boundaries
-slope<- readRDS("C:/Users/kuelling/Documents/VALPAR/DATA/UNIL_data/slope_mean/ch_topo_alti3d2016_pixel_slope_mean2m.rds")
+prodreg<- readOGR("C:\\Users\\...\\PRODREG.shp") #production regions from CH
+cantons<- readOGR("C:\\Users\\...\\swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.shp") #cantons boundaries
+slope<- readRDS("C:/Users/.../ch_topo_alti3d2016_pixel_slope_mean2m.rds")
 
-lulc97<- raster("C:/Users/kuelling/Documents/VALPAR/DATA/OFS25_DS/1997/results/LU-CH_1997.tif")#LULC raster
-lulc09<- raster("C:/Users/kuelling/Documents/VALPAR/DATA/OFS25_DS/2009/results/LU-CH_2009.tif")#LULC raster
-lulc18<- raster("C:/Users/kuelling/Documents/VALPAR/DATA/OFS25_DS/2018/results/LU-CH_2018.tif")#LULC raster
+lulc97<- raster("C:/Users/.../LU-CH_1997.tif")#LULC raster
+lulc09<- raster("C:/Users/.../LU-CH_2009.tif")#LULC raster
+lulc18<- raster("C:/Users/.../LU-CH_2018.tif")#LULC raster
 
-pt<- "C:/Users/kuelling/Documents/VALPAR/DATA/forestry_CH" #BNS forestry file, ref "px-x-0703010000_102.px", wood harvest in m^3
+pt<- "C:/Users/.../forestry_CH" #BNS forestry file, ref "px-x-0703010000_102.px", wood harvest in m^3
+
+# Function that processes all input files and generates output raster maps.
 
 mat_f<-function(lulc,year){
   
