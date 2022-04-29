@@ -7,7 +7,7 @@ The data used in this model is the following:
 | Data                            | Source                                                      |
 | ------------------------------- | ----------------------------------------------------------- |
 | Evapotranspiration Raster layer | CHclim25-Broennimann / evapotranspiration using Turc method |
-| LULC                            | Downscaled LULC map (25m) Giuliani et al., 2021             |
+| LULC                            | Downscaled LULC map (25m) Giuliani et al., 2022             |
 | Plants available water content  | OFAG: Soil aptitudes                                        |
 | Root restricting depth          | OFAG: Soil aptitudes                                        |
 | Annual precipitations           | Bioclim Bio12, downscaled 25m (O. Broennimann)              |
