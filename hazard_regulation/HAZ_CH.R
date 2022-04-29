@@ -6,29 +6,29 @@ library(fasterize)
 
 #---Local paths
 
-wd<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Hazards regulation/FINAL/SUPPLY/CODE"
+wd<-"C:/Users/.../CODE"
 setwd(wd)
-outfold_s<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Hazards regulation/FINAL/SUPPLY"
-outfold_f<-"C:/Users/kuelling/Documents/VALPAR/ES Assessment/Hazards regulation/FINAL/FLOW"
+outfold_s<-"C:/Users/.../SUPPLY"
+outfold_f<-"C:/Users/.../FLOW"
 
 #---Local variables
 
 #-Natural hazards (rasterized on arcgis for efficiency)
-haz<-raster("C:/Users/kuelling/Documents/VALPAR/DATA/SILVAPROTECTCH/rasterized/haz_tot.tif")
+haz<-raster("C:/Users/.../haz_tot.tif")
 #protective forests
-pf<- raster("C:/Users/kuelling/Documents/VALPAR/DATA/SILVAPROTECTCH/rasterized/srPW_CH_raster.tif")
-#flooding areas
-fa<-st_read("C:/Users/kuelling/Documents/VALPAR/DATA/Floodplains/data/Auen_LV95/au.shp")
+pf<- raster("C:/Users/.../srPW_CH_raster.tif")
+#floodplains
+fa<-st_read("C:/Users/.../au.shp")
 
 #extent template
 
-template<-raster("C:/Users/kuelling/Documents/VALPAR/DATA/valparc_grid_LV95.tif")
+template<-raster("C:/Users/.../valparc_grid_LV95.tif")
 
 #-LULC rasters
 
-lulc97<- raster("C:/Users/kuelling/Documents/VALPAR/DATA/OFS25_DS/1997/results/LU-CH_1997.tif")#LULC raster
-lulc09<- raster("C:/Users/kuelling/Documents/VALPAR/DATA/OFS25_DS/2009/results/LU-CH_2009.tif")#LULC raster
-lulc18<- raster("C:/Users/kuelling/Documents/VALPAR/DATA/OFS25_DS/2018/results/LU-CH_2018.tif")#LULC raster
+lulc97<- raster("C:/Users/.../LU-CH_1997.tif")#LULC raster
+lulc09<- raster("C:/Users/.../LU-CH_2009.tif")#LULC raster
+lulc18<- raster("C:/Users/.../LU-CH_2018.tif")#LULC raster
 
 
 #1) rasterize flooding areas
@@ -49,7 +49,7 @@ m_pf<- c(0,1,0,
 rcl<-matrix(m_pf, ncol=3, byrow=TRUE)
 pf<- reclassify(pf, rcl)
 
-#3) function to obtain HAZ ES
+#3) function to obtain HAZ ES (supply and flow)
 
 HAZ_f<-function(lulc,year){
   
@@ -106,9 +106,7 @@ HAZ_f<-function(lulc,year){
   rcl<-matrix(su_m, ncol=2, byrow=TRUE)
   haz_su<- reclassify(haz_su, rcl)
   
-  #adding eventual forest present in PF layer in the supply layer, for consistency
-  
-  
+  #adding eventual forest present in PF layer in the supply layer
   
   haz_s<-haz_su + fl2
   
